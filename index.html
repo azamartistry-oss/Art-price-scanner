@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
+    <title>QR Scanner | Azam Artistry</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QR Code Scanner</title>
-    <script src="https://unpkg.com/html5-qrcode"></script>
+    <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            margin-top: 50px;
+            margin-top: 40px;
         }
         #reader {
             width: 300px;
@@ -18,24 +17,28 @@
     </style>
 </head>
 <body>
-    <h1>Scan QR Code</h1>
-    <div id="reader"></div>
-    <p id="result"></p>
 
-    <script>
-        function onScanSuccess(decodedText, decodedResult) {
-            document.getElementById("result").innerText = `Scanned: ${decodedText}`;
-            // Redirect to the scanned link
-            window.location.href = decodedText;
-        }
+<h2>Scan Your Art QR</h2>
+<div id="reader"></div>
+<p id="result">Waiting for scan...</p>
 
-        function onScanError(errorMessage) {
-            // ignore errors for now
-        }
+<script>
+function onScanSuccess(decodedText, decodedResult) {
+    document.getElementById('result').innerText = `Scanned: ${decodedText}`;
+    // Redirect to the scanned link (optional)
+    window.location.href = decodedText;
+}
 
-        let html5QrcodeScanner = new Html5QrcodeScanner(
-            "reader", { fps: 10, qrbox: 250 });
-        html5QrcodeScanner.render(onScanSuccess, onScanError);
-    </script>
+function onScanError(errorMessage) {
+    console.warn(`Scan error: ${errorMessage}`);
+}
+
+let html5QrcodeScanner = new Html5QrcodeScanner(
+    "reader",
+    { fps: 10, qrbox: 250 }
+);
+html5QrcodeScanner.render(onScanSuccess, onScanError);
+</script>
+
 </body>
 </html>
